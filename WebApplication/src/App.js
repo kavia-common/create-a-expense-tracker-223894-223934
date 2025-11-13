@@ -1,48 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { AppProvider, useApp } from "./context/AppContext";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Expenses from "./pages/Expenses";
+import Auth from "./pages/Auth";
+import Settings from "./pages/Settings";
+
+// Simple guard for authenticated routes (placeholder)
+function PrivateRoute({ children }) {
+  const { state } = useApp();
+  if (!state.user) {
+    return <Navigate to="/auth" replace />;
+  }
+  return children;
+}
 
 // PUBLIC_INTERFACE
 function App() {
-  const [theme, setTheme] = useState('light');
-
-  // Effect to apply theme to document element
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
-
+  /** Root App component mounting Router and global Provider. */
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProvider>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/expenses"
+              element={
+                <PrivateRoute>
+                  <Expenses />
+                </PrivateRoute>
+              }
+            />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </AppProvider>
   );
 }
 

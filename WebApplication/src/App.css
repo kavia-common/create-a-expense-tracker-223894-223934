@@ -4,9 +4,9 @@
   --bg-primary: #ffffff;
   --bg-secondary: #f8f9fa;
   --text-primary: #282c34;
-  --text-secondary: #61dafb;
+  --text-secondary: #0d6efd;
   --border-color: #e9ecef;
-  --button-bg: #007bff;
+  --button-bg: #0d6efd;
   --button-text: #ffffff;
 }
 
@@ -17,40 +17,32 @@
   --text-primary: #ffffff;
   --text-secondary: #61dafb;
   --border-color: #404040;
-  --button-bg: #0056b3;
+  --button-bg: #0a58ca;
   --button-text: #ffffff;
 }
 
 .App {
-  text-align: center;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.navbar a {
   color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+.navbar a.active {
+  background: var(--border-color);
 }
 
 .App-link {
@@ -59,46 +51,32 @@
 }
 
 .theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   background-color: var(--button-bg);
   color: var(--button-text);
   border: none;
   border-radius: 8px;
-  padding: 10px 20px;
+  padding: 8px 14px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .theme-toggle:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  opacity: 0.95;
 }
 
 .theme-toggle:active {
   transform: translateY(0);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 /* Responsive design for mobile */
 @media (max-width: 768px) {
   .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
+    padding: 8px 12px;
     font-size: 12px;
   }
 }
