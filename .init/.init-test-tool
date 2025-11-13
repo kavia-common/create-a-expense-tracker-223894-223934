@@ -1,0 +1,4 @@
+{
+    "command": "npm run test",
+    "working_directory": "/home/kavia/workspace/code-generation/create-a-expense-tracker-223894-223934/WebApplication"
+}
